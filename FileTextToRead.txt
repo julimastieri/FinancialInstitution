@@ -1,0 +1,2 @@
+car bicycle motorcycle banana apple bicycle car
+apple banana apple apple
