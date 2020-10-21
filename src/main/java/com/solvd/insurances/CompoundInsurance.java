@@ -1,14 +1,15 @@
 package main.java.com.solvd.insurances;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CompoundInsurance implements IInsurance {
 
-	private ArrayList<IInsurance> insurances = new ArrayList<IInsurance>();
+	private List<IInsurance> insurances = new ArrayList<IInsurance>();
 
 	public CompoundInsurance() {}
 	
-	public ArrayList<IInsurance> getInsurances() {
+	public List<IInsurance> getInsurances() {
 		return insurances;
 	}
 

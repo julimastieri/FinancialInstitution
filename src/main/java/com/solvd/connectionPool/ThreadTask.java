@@ -21,7 +21,11 @@ public class ThreadTask extends Thread {
 	}
 	
 	public void run() {
-		Connection c = cp.getAConnection();
+		try {
+			cp.getAConnection();
+		} catch (InterruptedException e) {
+			logger.error(e);
+		}
 		logger.info("Thread #" + id + " get a connection successfully");
 	}
 

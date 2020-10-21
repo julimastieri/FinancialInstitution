@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +35,7 @@ public class Main {
 		// linkedListExample();
 		// fileExercise();
 		connectionPoolExercise();
+		// completableFutureExercise();
 
 	}
 
@@ -84,7 +86,7 @@ public class Main {
 		String fileText = FileUtils.readFileToString(file, "UTF-8");
 
 		String[] words = StringUtils.split(fileText);
-		HashSet<String> uniqueWords = new HashSet<String>(Arrays.asList(words));
+		Set<String> uniqueWords = new HashSet<String>(Arrays.asList(words));
 		StringBuilder dataToWrite = new StringBuilder();
 		uniqueWords.forEach(word -> dataToWrite.append(word + " " + StringUtils.countMatches(fileText, word) + "\n"));
 

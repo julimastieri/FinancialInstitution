@@ -1,5 +1,0 @@
-motorcycle 1
-banana 2
-apple 4
-bicycle 2
-car 2

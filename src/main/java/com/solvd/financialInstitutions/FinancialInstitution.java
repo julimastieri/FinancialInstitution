@@ -6,6 +6,7 @@ import main.java.com.solvd.credits.Credit;
 import main.java.com.solvd.people.Employee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -14,8 +15,8 @@ public abstract class FinancialInstitution implements ISignatory, Contactable{
 	
 	private int identification;
 	private String name;
-	private ArrayList<Employee> employees = new ArrayList<Employee>();
-	private ArrayList<Credit> credits = new ArrayList<Credit>();
+	private List<Employee> employees = new ArrayList<Employee>();
+	private List<Credit> credits = new ArrayList<Credit>();
 	
 	public FinancialInstitution() {}
 	
@@ -99,7 +100,7 @@ public abstract class FinancialInstitution implements ISignatory, Contactable{
 		this.name = name;
 	}
 
-	public ArrayList<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employees;
 	}
 	
@@ -107,7 +108,7 @@ public abstract class FinancialInstitution implements ISignatory, Contactable{
 		this.employees.add(employee);
 	}
 	
-	public ArrayList<Credit> getCredits() {
+	public List<Credit> getCredits() {
 		return credits;
 	}
 	

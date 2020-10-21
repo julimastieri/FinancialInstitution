@@ -1,50 +1,35 @@
 package main.java.com.solvd.connectionPool;
 
-import java.util.ArrayList;
-
-import org.apache.log4j.Logger;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool {
-	private static final Logger logger = Logger.getLogger(ConnectionPool.class);
 	private final static int MAX_CONNECTIONS = 5;
-	private int availablesConnections = MAX_CONNECTIONS;
-	private ArrayList<Connection> connections = new ArrayList<Connection>();
+	private int createdConnections = 0;
+	private BlockingQueue<Connection> connections = new ArrayBlockingQueue<Connection>(MAX_CONNECTIONS);
 
 	public ConnectionPool() {
 	}
 
-	public synchronized Connection getAConnection() {
-		
-		while (availablesConnections == 0) {
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
-		}
-		
+	public Connection getAConnection() throws InterruptedException {
 		Connection connection = connections.stream().filter(c -> c.isAvailable()).findFirst().orElse(null);
 		if (connection != null) {
 			connection.setAvailable(false);
-			availablesConnections--;
 			return connection;
-		} else if (connections.size() < MAX_CONNECTIONS) {
+		} else if (createdConnections < MAX_CONNECTIONS) {
 			Connection newConnection = new Connection(false);
-			connections.add(newConnection);
-			availablesConnections--;
+			createdConnections++;
 			return newConnection;
+		} else {
+			Connection c = connections.take();
+			System.out.println(c);
+			return c;
 		}
-		
-		return null;
 	}
 
-	public synchronized void releaseConnection(Connection connection) {
-		int index = connections.indexOf(connection);
-		if (index != -1) {
-			connections.get(index).setAvailable(true);
-			availablesConnections++;
-			this.notify();
-		}
+	public void releaseConnection(Connection connection) throws InterruptedException {
+		connection.setAvailable(true);
+		connections.put(connection);
 	}
 
 	public void closeAllConnections() {

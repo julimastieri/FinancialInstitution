@@ -5,13 +5,14 @@ import main.java.com.solvd.enums.CreditStatus;
 import main.java.com.solvd.exceptions.CreditNotApprovedException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Client extends Person{
 	private String profession;
 	private String currentJob;
 	private float salary;
 	private int accountNumber;
-	private ArrayList<Credit> credits  = new ArrayList<Credit>();
+	private List<Credit> credits  = new ArrayList<Credit>();
 	
 	public Client() {}
 
@@ -54,7 +55,7 @@ public class Client extends Person{
 		this.accountNumber = accountNumber;
 	}
 
-	public ArrayList<Credit> getCredits() {
+	public List<Credit> getCredits() {
 		return credits;
 	}
 
