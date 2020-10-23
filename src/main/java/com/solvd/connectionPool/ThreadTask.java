@@ -23,10 +23,11 @@ public class ThreadTask extends Thread {
 	public void run() {
 		try {
 			cp.getAConnection();
+			logger.info("Thread #" + id + " get a connection successfully");
 		} catch (InterruptedException e) {
 			logger.error(e);
 		}
-		logger.info("Thread #" + id + " get a connection successfully");
+		
 	}
 
 }

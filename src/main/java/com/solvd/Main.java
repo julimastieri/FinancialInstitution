@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +44,8 @@ public class Main {
 
 	public static void connectionPoolExercise() throws InterruptedException, ExecutionException {
 		ConnectionPool cp = new ConnectionPool();
-
+		ExecutorService executor =Executors.newFixedThreadPool(10);
+		
 		// Threads
 		ThreadTask thread1 = new ThreadTask(1, cp);
 		ThreadTask thread2 = new ThreadTask(2, cp);
@@ -49,13 +53,21 @@ public class Main {
 		RunnableTask runnable1 = new RunnableTask(4, cp);
 		RunnableTask runnable2 = new RunnableTask(5, cp);
 		RunnableTask runnable3 = new RunnableTask(6, cp);
-
-		thread1.start();
-		thread2.start();
-		thread3.start();
-		runnable1.run();
-		runnable2.run();
-		runnable3.run();
+		
+		executor.execute(thread1);
+		executor.execute(thread2);
+		executor.execute(thread3);
+		executor.execute(runnable1);
+		executor.execute(runnable2);
+		executor.execute(runnable3);
+		
+		executor.shutdown();
+		
+		try {
+			executor.awaitTermination(10, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			logger.error(e);
+		}
 
 	}
 

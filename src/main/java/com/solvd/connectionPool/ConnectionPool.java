@@ -12,28 +12,23 @@ public class ConnectionPool {
 	}
 
 	public Connection getAConnection() throws InterruptedException {
-		Connection connection = connections.stream().filter(c -> c.isAvailable()).findFirst().orElse(null);
-		if (connection != null) {
-			connection.setAvailable(false);
-			return connection;
-		} else if (createdConnections < MAX_CONNECTIONS) {
-			Connection newConnection = new Connection(false);
-			createdConnections++;
-			return newConnection;
-		} else {
-			Connection c = connections.take();
-			System.out.println(c);
-			return c;
+		synchronized(this) {
+			if((connections.size() == 0) && (createdConnections < MAX_CONNECTIONS)){
+				connections.put(new Connection());
+				createdConnections++;
+			}
+				
 		}
+		return connections.take();
 	}
 
 	public void releaseConnection(Connection connection) throws InterruptedException {
-		connection.setAvailable(true);
 		connections.put(connection);
 	}
 
 	public void closeAllConnections() {
 		connections.clear();
+		createdConnections = 0;
 	}
 
 }

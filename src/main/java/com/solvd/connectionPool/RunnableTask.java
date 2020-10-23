@@ -19,10 +19,10 @@ public class RunnableTask implements Runnable {
 	public void run() {
 		try {
 			cp.getAConnection();
-		} catch (InterruptedException e) {
+			logger.info("Runnable #" + id + " get a connection successfully");
+		} catch (Exception e) {
 			logger.error(e);
 		}
-		logger.info("Runnable #" + id + " get a connection successfully");
 		
 	}
 
