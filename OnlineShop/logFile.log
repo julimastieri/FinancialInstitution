@@ -6,3 +6,10 @@
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server.
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server.
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server.
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server.
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLSyntaxErrorException: Table 'online_shop.users' doesn't exist
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLSyntaxErrorException: Table 'online_shop.users' doesn't exist
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLSyntaxErrorException: Table 'online_shop.users' doesn't exist
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Before start of result set
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Column 'Finish' not found.
+[main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Column 'nam' not found.

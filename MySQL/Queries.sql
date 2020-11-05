@@ -29,17 +29,11 @@ VALUES(824,'Roca','Tandil','Buenos Aires','Argentina');
 INSERT INTO Addresses(`number`,`street`,`city`,`province`,`country`)
 VALUES(1220,'9 de Julio','Capital Federal','Buenos Aires','Argentina');
 
-INSERT INTO User_Adresses(`address_id`,`user_id`)
-VALUES(1,1);
-
-INSERT INTO User_Adresses(`address_id`,`user_id`)
-VALUES(2,1);
-
-INSERT INTO User_Adresses(`address_id`,`user_id`)
-VALUES(2,2);
-
 INSERT INTO Orders(`total`,`discount`,`buyer_id`,`shipping_address`)
 VALUES(1500,0,1,1);
+
+INSERT INTO Orders(`total`,`discount`,`buyer_id`,`shipping_address`)
+VALUES(8000,20,1,2);
 
 INSERT INTO Orders(`total`,`discount`,`buyer_id`,`shipping_address`)
 VALUES(2000,9,3,2);

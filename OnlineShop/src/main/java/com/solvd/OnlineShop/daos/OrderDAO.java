@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.solvd.OnlineShop.daoInterfaces.IUserDAO;
-import com.solvd.OnlineShop.models.User;
+import com.solvd.OnlineShop.daoInterfaces.IOrderDAO;
+import com.solvd.OnlineShop.models.Order;
 import com.solvd.OnlineShop.mySqlAbstractDAO.MySQLAbstractDAO;
 
-public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
-	private static final Logger logger = Logger.getLogger(UserDAO.class);
-	private final static String GET_USER = "SELECT * FROM Users u where u.id=?";
+public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
+	private static final Logger logger = Logger.getLogger(ProductDAO.class);
+	private final static String GET_ORDER = "SELECT * FROM Orders o where o.id=?";
 
-	public User getUserById(long id) {
+	public Order getOrderById(long id) {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,19 +23,19 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 			logger.error(e);
 		}
 
-		User u = null;
+		Order o = null;
 		Connection con = null;
 		PreparedStatement pr = null;
 		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER);
+			pr = con.prepareStatement(GET_ORDER);
 			pr.setLong(1, id);
 			rs = pr.executeQuery();
 
 			if (rs.next()) {
-				u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getInt("age"), rs.getString("email"), rs.getString("password"), rs.getString("mobile"));
+				o = new Order(rs.getInt("id"), rs.getFloat("total"), rs.getFloat("discount"));
 			}
 
 		} catch (InterruptedException e) {
@@ -59,8 +59,6 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 				logger.error(e);
 			}
 		}
-
-		return u;
-
+		return o;
 	}
 }
