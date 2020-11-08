@@ -1,8 +1,5 @@
 package com.solvd.OnlineShop.dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +22,6 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 		}
 
 		List<Product> lp = new ArrayList<Product>();
-		Connection con = null;
-		PreparedStatement pr = null;
-		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();

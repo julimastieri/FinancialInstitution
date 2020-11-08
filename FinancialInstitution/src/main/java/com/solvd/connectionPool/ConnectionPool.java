@@ -36,8 +36,7 @@ public class ConnectionPool {
 			if((connections.size() == 0) && (createdConnections.get() < MAX_SIZE)){
 				connections.put(new Connection());
 				createdConnections.incrementAndGet();
-			}
-				
+			}	
 		}
 		return connections.take();
 	}

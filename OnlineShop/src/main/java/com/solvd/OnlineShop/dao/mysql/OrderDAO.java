@@ -1,8 +1,5 @@
 package com.solvd.OnlineShop.dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
@@ -11,8 +8,12 @@ import com.solvd.OnlineShop.dao.IOrderDAO;
 import com.solvd.OnlineShop.models.Order;
 
 public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
+
 	private static final Logger logger = Logger.getLogger(ProductDAO.class);
 	private final static String GET_ORDER = "SELECT * FROM Orders o where o.id=?";
+
+	public OrderDAO() {
+	}
 
 	public Order getOrderById(long id) {
 
@@ -23,9 +24,6 @@ public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 		}
 
 		Order o = null;
-		Connection con = null;
-		PreparedStatement pr = null;
-		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();

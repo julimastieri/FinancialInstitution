@@ -1,8 +1,5 @@
 package com.solvd.OnlineShop.dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import com.solvd.OnlineShop.dao.IAddressDAO;
 import com.solvd.OnlineShop.models.Address;
-
 
 public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 	private static final Logger logger = Logger.getLogger(AddressDAO.class);
@@ -27,13 +23,10 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 		}
 
 		Address a = null;
-		Connection con = null;
-		PreparedStatement pr = null;
-		ResultSet rs = null;
-
+		
 		try {
 			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_SHIPPING_ADDRESS);
+			this.pr = con.prepareStatement(GET_SHIPPING_ADDRESS);
 			pr.setLong(1, id);
 			rs = pr.executeQuery();
 
@@ -74,9 +67,6 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 		}
 
 		List<Address> al = new ArrayList<Address>();
-		Connection con = null;
-		PreparedStatement pr = null;
-		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();

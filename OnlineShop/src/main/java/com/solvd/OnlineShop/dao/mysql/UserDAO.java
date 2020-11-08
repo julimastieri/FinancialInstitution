@@ -1,8 +1,5 @@
 package com.solvd.OnlineShop.dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
@@ -23,9 +20,6 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 		}
 
 		User u = null;
-		Connection con = null;
-		PreparedStatement pr = null;
-		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();

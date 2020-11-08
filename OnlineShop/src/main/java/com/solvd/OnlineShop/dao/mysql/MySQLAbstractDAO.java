@@ -10,10 +10,10 @@ public abstract class MySQLAbstractDAO {
 	protected ConnectionPool pool;
 
 	protected ResultSet rs;
-	protected PreparedStatement ps;
-	protected Connection conn;
+	protected PreparedStatement pr;
+	protected Connection con;
 
 	public MySQLAbstractDAO() {
-		pool = ConnectionPool.getInstance("jdbc:mysql://localhost:3306/online_shop", "root", "my-secret-pw"); 
+		pool = ConnectionPool.getInstance();
 	}
 }
