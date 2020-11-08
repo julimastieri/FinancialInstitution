@@ -1,7 +1,6 @@
 package com.solvd.OnlineShop.models;
 
-public class Address {
-	private int id;
+public class Address extends AbstractEntity{
 	private float number;
 	private String street;
 	private String city;
@@ -12,21 +11,12 @@ public class Address {
 	}
 	
 	public Address(int id, float number, String street, String city, String province, String country) {
-		super();
-		this.id = id;
+		super(id);
 		this.number = number;
 		this.street = street;
 		this.city = city;
 		this.province = province;
 		this.country = country;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public float getNumber() {

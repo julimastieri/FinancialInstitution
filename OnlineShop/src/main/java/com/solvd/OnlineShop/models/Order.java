@@ -1,7 +1,6 @@
 package com.solvd.OnlineShop.models;
 
-public class Order {
-	private int id;
+public class Order extends AbstractEntity{
 	private float total;
 	private float discount;
 	private Address shippingAddress;
@@ -10,18 +9,11 @@ public class Order {
 	}
 	
 	public Order(int id, float total, float discount) {
-		super();
-		this.id = id;
+		super(id);
 		this.total = total;
 		this.discount = discount;
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public float getTotal() {
 		return total;
 	}

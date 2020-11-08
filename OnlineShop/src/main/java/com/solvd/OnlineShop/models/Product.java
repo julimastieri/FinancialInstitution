@@ -1,7 +1,6 @@
 package com.solvd.OnlineShop.models;
 
-public class Product {
-	private int id;
+public class Product extends AbstractEntity{
 	private String name;
 	private float price;
 	private String description;
@@ -11,19 +10,10 @@ public class Product {
 	}
 
 	public Product(int id, String name, float price, String description) {
-		super();
-		this.id = id;
+		super(id);
 		this.name = name;
 		this.price = price;
 		this.description = description;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

@@ -3,9 +3,8 @@ package com.solvd.OnlineShop.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User extends AbstractEntity{
 
-	private int id;
 	private String name;
 	private String lastName;
 	private int age;
@@ -13,12 +12,13 @@ public class User {
 	private String password;
 	private String mobile;
 	private List<Product> products;
+	private List<SearchHistory> searchHistory;
+	private List<Preference> preferences;
 
 	public User() {}
 
 	public User(int id, String name, String lastName, int age, String email, String password, String mobile) {
-		super();
-		this.id = id;
+		super(id);
 		this.name = name;
 		this.lastName = lastName;
 		this.age = age;
@@ -26,14 +26,6 @@ public class User {
 		this.password = password;
 		this.mobile = mobile;
 		this.products = new ArrayList<Product>();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -90,6 +82,22 @@ public class User {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public List<SearchHistory> getSearchHistory() {
+		return searchHistory;
+	}
+
+	public void setSearchHistory(List<SearchHistory> searchHistory) {
+		this.searchHistory = searchHistory;
+	}
+
+	public List<Preference> getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(List<Preference> preferences) {
+		this.preferences = preferences;
 	}
 
 }

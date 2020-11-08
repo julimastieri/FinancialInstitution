@@ -15,13 +15,6 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 	private final static String GET_USER_ADDRESSES = "SELECT DISTINCT a.* FROM Addresses a LEFT JOIN Orders o ON o.shipping_address = a.id WHERE o.buyer_id=?";
 
 	public Address getShippingAddress(long id) {
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			logger.error(e);
-		}
-
 		Address a = null;
 		
 		try {
@@ -59,13 +52,7 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 		return a;
 	}
 
-	public List<Address> getUserAddresses(long id) {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			logger.error(e);
-		}
-
+	public List<Address> getAddressesByUserId(long id) {
 		List<Address> al = new ArrayList<Address>();
 
 		try {
@@ -102,4 +89,17 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 		}
 		return al;
 	}
+
+	@Override
+	public Address save(Address e, long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeById(long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -4,26 +4,25 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.solvd.OnlineShop.dao.IOrderDAO;
-import com.solvd.OnlineShop.models.Order;
+import com.solvd.OnlineShop.dao.ICategoryDAO;
+import com.solvd.OnlineShop.models.Category;
 
-public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
-
-	private static final Logger logger = Logger.getLogger(ProductDAO.class);
-	private final static String GET_ORDER = "SELECT * FROM Orders o where o.id=?";
-
-	public Order getOrderById(long id) {
-
-		Order o = null;
+public class CategoryDAO extends MySQLAbstractDAO implements ICategoryDAO {
+	private static final Logger logger = Logger.getLogger(CategoryDAO.class);
+	private final static String GET_CATEGORY_BY_PREFERENCE = "SELECT * FROM Preferences p LEFT JOIN Categories c ON p.category_id=c.id where p.id=?";
+	
+	@Override
+	public Category getCategoryByPreferenceId(long preferenceId) {
+		Category category = null;
 
 		try {
 			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_ORDER);
-			pr.setLong(1, id);
+			pr = con.prepareStatement(GET_CATEGORY_BY_PREFERENCE);
+			pr.setLong(1, preferenceId);
 			rs = pr.executeQuery();
 
 			if (rs.next()) {
-				o = new Order(rs.getInt("id"), rs.getFloat("total"), rs.getFloat("discount"));
+				category = new Category(rs.getInt("id"), rs.getString("name"));
 			}
 
 		} catch (InterruptedException e) {
@@ -47,11 +46,11 @@ public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 				logger.error(e);
 			}
 		}
-		return o;
+		return category;
 	}
-
+	
 	@Override
-	public Order save(Order e, long id) {
+	public Category save(Category e, long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -61,4 +60,7 @@ public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
+
 }
