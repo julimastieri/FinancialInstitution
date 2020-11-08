@@ -1,4 +1,4 @@
-package com.solvd.OnlineShop.daoInterfaces;
+package com.solvd.OnlineShop.dao;
 
 import java.util.List;
 

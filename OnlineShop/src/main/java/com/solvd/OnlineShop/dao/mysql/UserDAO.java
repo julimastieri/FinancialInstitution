@@ -1,23 +1,20 @@
-package com.solvd.OnlineShop.daos;
+package com.solvd.OnlineShop.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.solvd.OnlineShop.daoInterfaces.IProductDAO;
-import com.solvd.OnlineShop.models.Product;
-import com.solvd.OnlineShop.mySqlAbstractDAO.MySQLAbstractDAO;
+import com.solvd.OnlineShop.dao.IUserDAO;
+import com.solvd.OnlineShop.models.User;
 
-public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
-	private static final Logger logger = Logger.getLogger(ProductDAO.class);
-	private final static String GET_USER_PRODUCTS = "SELECT * FROM Products p where p.user_id=?";
+public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
+	private static final Logger logger = Logger.getLogger(UserDAO.class);
+	private final static String GET_USER = "SELECT * FROM Users u where u.id=?";
 
-	public List<Product> getProductsByUserId(long userId) {
+	public User getUserById(long id) {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,19 +22,19 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 			logger.error(e);
 		}
 
-		List<Product> lp = new ArrayList<Product>();
+		User u = null;
 		Connection con = null;
 		PreparedStatement pr = null;
 		ResultSet rs = null;
 
 		try {
 			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER_PRODUCTS);
-			pr.setLong(1, userId);
+			pr = con.prepareStatement(GET_USER);
+			pr.setLong(1, id);
 			rs = pr.executeQuery();
 
-			while (rs.next()) {
-				lp.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getString("description")));
+			if (rs.next()) {
+				u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getInt("age"), rs.getString("email"), rs.getString("password"), rs.getString("mobile"));
 			}
 
 		} catch (InterruptedException e) {
@@ -61,6 +58,8 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 				logger.error(e);
 			}
 		}
-		return lp;
+
+		return u;
+
 	}
 }

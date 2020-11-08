@@ -1,4 +1,4 @@
-package com.solvd.OnlineShop.daos;
+package com.solvd.OnlineShop.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.solvd.OnlineShop.daoInterfaces.IOrderDAO;
+import com.solvd.OnlineShop.dao.IOrderDAO;
 import com.solvd.OnlineShop.models.Order;
-import com.solvd.OnlineShop.mySqlAbstractDAO.MySQLAbstractDAO;
 
 public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 	private static final Logger logger = Logger.getLogger(ProductDAO.class);

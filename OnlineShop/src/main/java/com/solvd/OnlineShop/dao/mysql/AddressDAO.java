@@ -1,4 +1,4 @@
-package com.solvd.OnlineShop.daos;
+package com.solvd.OnlineShop.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.solvd.OnlineShop.daoInterfaces.IAddressDAO;
+import com.solvd.OnlineShop.dao.IAddressDAO;
 import com.solvd.OnlineShop.models.Address;
-import com.solvd.OnlineShop.mySqlAbstractDAO.MySQLAbstractDAO;
 
 
 public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {

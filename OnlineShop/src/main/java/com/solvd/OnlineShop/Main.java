@@ -2,7 +2,11 @@ package com.solvd.OnlineShop;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import com.solvd.OnlineShop.daos.*;
+import com.solvd.OnlineShop.dao.*;
+import com.solvd.OnlineShop.dao.mysql.AddressDAO;
+import com.solvd.OnlineShop.dao.mysql.OrderDAO;
+import com.solvd.OnlineShop.dao.mysql.ProductDAO;
+import com.solvd.OnlineShop.dao.mysql.UserDAO;
 import com.solvd.OnlineShop.models.*;
 
 public class Main {
@@ -35,4 +39,5 @@ public class Main {
 		AddressDAO ad = new AddressDAO();
 		ad.getUserAddresses(id);
 	}
+
 }
