@@ -1,8 +1,12 @@
 package com.solvd.OnlineShop.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -14,80 +18,47 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 	private final static String GET_SHIPPING_ADDRESS = "SELECT * FROM Orders o LEFT JOIN Addresses a ON o.shipping_address = a.id WHERE o.id=?";
 	private final static String GET_USER_ADDRESSES = "SELECT DISTINCT a.* FROM Addresses a LEFT JOIN Orders o ON o.shipping_address = a.id WHERE o.buyer_id=?";
 
-	public Address getShippingAddress(long id) {
-		Address a = null;
-		
-		try {
-			con = pool.getAConnection();
-			this.pr = con.prepareStatement(GET_SHIPPING_ADDRESS);
+	private Address getAllAtributesFromTable(ResultSet rs) throws SQLException {
+		return new Address(rs.getInt("id"), rs.getInt("number"), rs.getString("street"),
+				rs.getString("city"), rs.getString("province"), rs.getString("country"));
+	}
+	
+	public Optional<Address> getShippingAddress(long id) {
+		Address address = null;
+
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_SHIPPING_ADDRESS);
+				ResultSet rs = pr.executeQuery();) {
+
 			pr.setLong(1, id);
-			rs = pr.executeQuery();
-
 			if (rs.next()) {
-				a = new Address(rs.getInt("id"), rs.getInt("number"), rs.getString("street"), rs.getString("city"),
-						rs.getString("province"), rs.getString("country"));
+				address = getAllAtributesFromTable(rs);
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return a;
+
+		return Optional.ofNullable(address);
 	}
 
-	public List<Address> getAddressesByUserId(long id) {
+	public Optional<List<Address>> getAddressesByUserId(long id) {
 		List<Address> al = new ArrayList<Address>();
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER_ADDRESSES);
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_USER_ADDRESSES);
+				ResultSet rs = pr.executeQuery();) {
+
 			pr.setLong(1, id);
-			rs = pr.executeQuery();
-
 			while (rs.next()) {
-				al.add(new Address(rs.getInt("id"), rs.getInt("number"), rs.getString("street"), rs.getString("city"),
-						rs.getString("province"), rs.getString("country")));
+				al.add(getAllAtributesFromTable(rs));
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return al;
+
+		return Optional.of(al);
 	}
 
 	@Override

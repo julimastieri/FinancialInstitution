@@ -1,8 +1,12 @@
 package com.solvd.OnlineShop.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -14,80 +18,46 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 	private final static String GET_USER_PRODUCTS_BY_USER_ID = "SELECT * FROM Products p where p.user_id=?";
 	private final static String GET_USER_PRODUCTS_BY_SEARCH_ID = "SELECT * FROM Search_Histories sh LEFT JOIN Products p ON sh.product_id=p.id where sh.id=?";
 
-	public List<Product> getProductsByUserId (long userId){
+	private Product getAllAtributesFromTable(ResultSet rs) throws SQLException {
+		return new Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getString("description"));
+	}
+	
+	public Optional<List<Product>> getProductsByUserId (long userId){
 		List<Product> productList = new ArrayList<Product>();
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER_PRODUCTS_BY_USER_ID);
-			pr.setLong(1, userId);
-			rs = pr.executeQuery();
-
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_USER_PRODUCTS_BY_USER_ID);
+				ResultSet rs = pr.executeQuery();) {
+			
+			pr.setLong(1, userId); 
 			while (rs.next()) {
-				productList.add(new Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getString("description")));
+				productList.add(getAllAtributesFromTable(rs));
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return productList;
+		return Optional.of(productList);
 	}
 
 	
 	@Override
-	public Product getProductsBySearchId(long searchId) {
+	public Optional<Product> getProductsBySearchId(long searchId) {
 		Product product = null;
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER_PRODUCTS_BY_SEARCH_ID);
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_USER_PRODUCTS_BY_SEARCH_ID);
+				ResultSet rs = pr.executeQuery();){
+
 			pr.setLong(1, searchId);
-			rs = pr.executeQuery();
-
 			if (rs.next()) {
-				product = new  Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getString("description"));
+				product = getAllAtributesFromTable(rs);
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return product;
+		return Optional.ofNullable(product);
 	}
 
 	@Override

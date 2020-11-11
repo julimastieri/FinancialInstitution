@@ -3,13 +3,11 @@ package com.solvd.OnlineShop.models;
 public abstract class AbstractEntity {
 	private long id;
 
-	public AbstractEntity(long id) {
-		super();
-		this.id = id;
+	public AbstractEntity() {
 	}
 	
-	public AbstractEntity() {
-		this.id=-1;
+	public AbstractEntity(long id) {
+		this.id = id;
 	}
 
 	public long getId() {

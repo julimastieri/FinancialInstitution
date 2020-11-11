@@ -1,8 +1,12 @@
 package com.solvd.OnlineShop.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -15,42 +19,23 @@ public class PreferenceDAO extends MySQLAbstractDAO implements IPreferenceDAO {
 	private final static String GET_USER_PREFERENCES = "SELECT * FROM Preferences p where p.user_id=?";
 
 	@Override
-	public List<Preference> getPreferencesByUserId(long userId) {
+	public Optional<List<Preference>> getPreferencesByUserId(long userId) {
 		List<Preference> preferenceList = new ArrayList<Preference>();
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER_PREFERENCES);
-			pr.setLong(1, userId);
-			rs = pr.executeQuery();
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_USER_PREFERENCES);
+				ResultSet rs = pr.executeQuery();){
 
+			pr.setLong(1, userId);
 			while (rs.next()) {
 				preferenceList.add(new Preference(rs.getInt("id")));
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return preferenceList;
 
+		return Optional.of(preferenceList);
 	}
 
 	@Override

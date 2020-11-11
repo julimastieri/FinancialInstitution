@@ -9,13 +9,18 @@ import com.solvd.OnlineShop.dao.mysql.SearchHistoryDAO;
 import com.solvd.OnlineShop.models.SearchHistory;
 
 public class SearchHistoryService {
-	ISearchHistoryDAO searchDao = new SearchHistoryDAO();
-	IProductDAO productDao = new ProductDAO();
+	private ISearchHistoryDAO searchDao;
+	private IProductDAO productDao;
+	
+	public SearchHistoryService() {
+		searchDao = new SearchHistoryDAO();
+		productDao = new ProductDAO();
+	}
 
 	public List<SearchHistory> getSearchHistoryByUserId(long userId) {
-		List<SearchHistory> searchHistoryList = searchDao.getSearchHistoryByUserId(userId);
+		List<SearchHistory> searchHistoryList = searchDao.getSearchHistoryByUserId(userId).get();
 
-		searchHistoryList.forEach((sh) -> sh.setProduct(productDao.getProductsBySearchId(sh.getId())));
+		searchHistoryList.forEach((sh) -> sh.setProduct(productDao.getProductsBySearchId(sh.getId()).get()));
 
 		return searchHistoryList;
 

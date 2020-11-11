@@ -13,3 +13,35 @@
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Before start of result set
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Column 'Finish' not found.
 [main] ERROR com.solvd.OnlineShop.daos.UserDAO  - java.sql.SQLException: Column 'nam' not found.
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1

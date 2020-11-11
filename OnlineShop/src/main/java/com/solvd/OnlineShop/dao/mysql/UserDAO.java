@@ -1,6 +1,10 @@
 package com.solvd.OnlineShop.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -12,53 +16,35 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 	private final static String GET_USER = "SELECT * FROM Users u where u.id=?";
 	private static final String INSERT = "INSERT INTO Users(name, last_name, age, email, password, mobile) VALUES(?,?,?,?,?,?)";
 	private static final String DELETE = "DELETE FROM Users WHERE id = ?";
+	
+	private User getAllAtributesFromTable(ResultSet rs) throws SQLException {
+		return new User(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getInt("age"),
+				rs.getString("email"), rs.getString("password"), rs.getString("mobile"));
+	}
 
-	public User getUserById(long id) {
+	public Optional<User> getUserById(long id) {
 
 		User u = null;
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_USER);
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_USER);
+				ResultSet rs = pr.executeQuery();) {
+
 			pr.setLong(1, id);
-			rs = pr.executeQuery();
-
 			if (rs.next()) {
-				u = new User(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getInt("age"),
-						rs.getString("email"), rs.getString("password"), rs.getString("mobile"));
+				u = getAllAtributesFromTable(rs);
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
 
-		return u;
-
+		return Optional.ofNullable(u);
 	}
 
 	@Override
 	public User save(User e, long id) {
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(INSERT);
+		try (Connection con = pool.getAConnection(); PreparedStatement pr = con.prepareStatement(INSERT);) {
 
 			pr.setString(1, e.getName());
 			pr.setString(2, e.getLastName());
@@ -71,47 +57,22 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 			}
 
 			return e;
-		} catch (SQLException | InterruptedException ex) {
+		} catch (InterruptedException | SQLException ex) {
 			logger.error(ex);
-			return null;
-		} finally {
-			try {
-				pr.close();
-			} catch (SQLException ex) {
-				logger.error(ex);
-			}
-
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException exe) {
-				logger.error(exe);
-			}
 		}
+		return e;
 	}
 
 	@Override
 	public boolean removeById(long id) {
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(DELETE);
+		try (Connection con = pool.getAConnection(); PreparedStatement pr = con.prepareStatement(DELETE);){
+			
 			pr.setLong(1, id);
 			pr.executeUpdate();
 			return true;
 		} catch (SQLException | InterruptedException ex) {
 			logger.error(ex);
 			return false;
-		} finally {
-			try {
-				pr.close();
-			} catch (SQLException ex) {
-				logger.error(ex);
-			}
-
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
-		}
+		} 
 	}
 }

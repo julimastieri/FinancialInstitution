@@ -9,13 +9,18 @@ import com.solvd.OnlineShop.dao.mysql.PreferenceDAO;
 import com.solvd.OnlineShop.models.Preference;
 
 public class PreferenceService {
-	IPreferenceDAO preferenceDao = new PreferenceDAO();
-	ICategoryDAO categoryDao = new CategoryDAO();
+	private IPreferenceDAO preferenceDao = new PreferenceDAO();
+	private ICategoryDAO categoryDao = new CategoryDAO();
+	
+	public PreferenceService() {
+		preferenceDao = new PreferenceDAO();
+		categoryDao = new CategoryDAO();
+	}
 
 	public List<Preference> getPreferencesByUserId(long userId) {
-		List<Preference> preferenceList = preferenceDao.getPreferencesByUserId(userId);
+		List<Preference> preferenceList = preferenceDao.getPreferencesByUserId(userId).get();
 		
-		preferenceList.forEach( (p) -> p.setCategory(categoryDao.getCategoryByPreferenceId(p.getId())));
+		preferenceList.forEach( (p) -> p.setCategory(categoryDao.getCategoryByPreferenceId(p.getId()).get()));
 		
 		return preferenceList;
 		

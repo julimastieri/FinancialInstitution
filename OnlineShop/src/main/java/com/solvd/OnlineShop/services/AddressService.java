@@ -7,9 +7,13 @@ import com.solvd.OnlineShop.dao.mysql.AddressDAO;
 import com.solvd.OnlineShop.models.Address;
 
 public class AddressService {
-	IAddressDAO addressDao = new AddressDAO();
+	private IAddressDAO addressDao;
 	
+	public AddressService() {
+		addressDao = new AddressDAO();
+	}
+
 	public List<Address> getAddressesByUserId(long id) {
-		 return addressDao.getAddressesByUserId(id);
+		 return addressDao.getAddressesByUserId(id).get();
 	}
 }

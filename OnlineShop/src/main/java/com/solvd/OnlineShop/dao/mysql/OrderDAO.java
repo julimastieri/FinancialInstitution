@@ -1,6 +1,10 @@
 package com.solvd.OnlineShop.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
@@ -11,43 +15,28 @@ public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 
 	private static final Logger logger = Logger.getLogger(ProductDAO.class);
 	private final static String GET_ORDER = "SELECT * FROM Orders o where o.id=?";
+	
+	private Order getAllAtributesFromTable(ResultSet rs) throws SQLException {
+		return new Order(rs.getInt("id"), rs.getFloat("total"), rs.getFloat("discount"));
+	}
 
-	public Order getOrderById(long id) {
+	public Optional<Order> getOrderById(long id) {
 
 		Order o = null;
 
-		try {
-			con = pool.getAConnection();
-			pr = con.prepareStatement(GET_ORDER);
+		try (Connection con = pool.getAConnection();
+				PreparedStatement pr = con.prepareStatement(GET_ORDER);
+				ResultSet rs = pr.executeQuery();) {
+
 			pr.setLong(1, id);
-			rs = pr.executeQuery();
-
 			if (rs.next()) {
-				o = new Order(rs.getInt("id"), rs.getFloat("total"), rs.getFloat("discount"));
+				o = getAllAtributesFromTable(rs);
 			}
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
-		} catch (SQLException e) {
-			logger.error(e);
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pr.close();
-			} catch (SQLException e) {
-				logger.error(e);
-			}
-			try {
-				pool.releaseConnection(con);
-			} catch (InterruptedException e) {
-				logger.error(e);
-			}
 		}
-		return o;
+		return Optional.ofNullable(o);
 	}
 
 	@Override
