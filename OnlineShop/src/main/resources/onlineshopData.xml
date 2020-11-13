@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<onlineshop xmlns="https://www.w3schools.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.w3schools.com onlineshopScheme.xsd">
+	
+	<user>
+		<id>1</id>
+		<name>Julian</name> 
+		<last_name>Mastieri</last_name>
+		<age>22</age>
+		<email>jmast@gmail.com</email>
+		<password>1234</password>
+		<mobile>123456789</mobile>
+	</user>
+
+	<user>
+		<id>2</id>
+		<name>Valeria</name> 
+		<last_name>Tottene</last_name>
+		<email>vt@mail.com</email>
+		<password>1234</password>
+		<mobile>123456789</mobile>
+	</user>
+	
+	<notification>
+		<id>1</id>
+		<title>New purchase order completed</title> 
+		<description>Tottene</description>
+		<readed>false</readed>
+		<user_id>1</user_id>
+	</notification>
+	
+</onlineshop>
+

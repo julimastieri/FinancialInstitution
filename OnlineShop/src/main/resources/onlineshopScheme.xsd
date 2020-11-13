@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="https://www.w3schools.com"
+			xmlns="https://www.w3schools.com"
+			elementFormDefault="qualified">
+			
+	<xs:element name="onlineshop"/>
+			
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="name" type="xs:string"/>
+			  <xs:element name="last_name" type="xs:string"/>
+			  <xs:element name="age" type="xs:integer" minOccurs="0"/>
+			  <xs:element name="email" type="xs:string"/>
+			  <xs:element name="password" type="xs:string"/>
+			  <xs:element name="mobile" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+
+	<xs:element name="notification">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="title" type="xs:string"/>
+			  <xs:element name="description" type="xs:string"/>
+			  <xs:element name="readed" type="xs:boolean"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="giftcard">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="amount" type="xs:decimal"/>
+			  <xs:element name="code" type="xs:string"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="card">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="card_verification_value" type="xs:integer"/>
+			  <xs:element name="bank" type="xs:string"/>
+			  <xs:element name="number" type="xs:integer"/>
+			  <xs:element name="cardholder_name" type="xs:string"/>
+			  <xs:element name="expiration_date" type="xs:date"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="search_history">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="date" type="xs:date"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			  <xs:element name="product_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="order">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="total" type="xs:decimal"/>
+			  <xs:element name="discount" type="xs:decimal" minOccurs="0"/>
+			  <xs:element name="user_id" type="xs:long" minOccurs="0"/>
+			  <xs:element name="shipping_address" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="transaction">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="payment_method" type="xs:string"/>
+			  <xs:element name="status" type="xs:string"/>
+			  <xs:element name="order_id" type="xs:long" minOccurs="0"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="address">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="number" type="xs:integer"/>
+			  <xs:element name="street" type="xs:string"/>
+			  <xs:element name="city" type="xs:string"/>
+			  <xs:element name="province" type="xs:string"/>
+			  <xs:element name="country" type="xs:string"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="product">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="name" type="xs:string"/>
+			  <xs:element name="price" type="xs:decimal"/>
+			  <xs:element name="description" type="xs:string" minOccurs="0"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="preference">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="user_id" type="xs:long"/>
+			  <xs:element name="category_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="category">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="name" type="xs:string"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="product_review">
+		<xs:complexType>
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long"/>
+			  <xs:element name="title" type="xs:string"/>
+			  <xs:element name="rating" type="xs:string"/>
+			  <xs:element name="content" type="xs:string" minOccurs="0"/>
+			  <xs:element name="product_id" type="xs:long"/>
+			</xs:sequence>
+		  </xs:complexType>
+	</xs:element>
+	
+</xs:schema>

@@ -45,3 +45,12 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 [main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
 [main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
 [main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.UserDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.ProductDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
+[main] ERROR com.solvd.OnlineShop.dao.mysql.AddressDAO  - java.sql.SQLException: No value specified for parameter 1
