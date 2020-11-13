@@ -26,8 +26,8 @@
 	<notification>
 		<id>1</id>
 		<title>New purchase order completed</title> 
-		<description>Tottene</description>
-		<readed>false</readed>
+		<description>You buy a notebook</description>
+		<readed>true</readed>
 		<user_id>1</user_id>
 	</notification>
 	

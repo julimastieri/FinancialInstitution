@@ -27,6 +27,11 @@ public class User extends AbstractEntity{
 		this.mobile = mobile;
 		this.products = new ArrayList<Product>();
 	}
+	
+	@Override
+	public String toString() {
+		return getId() + " " + name + " " + lastName + " " + age + " " +email + " " + password + " " +mobile;
+	}
 
 	public String getName() {
 		return name;

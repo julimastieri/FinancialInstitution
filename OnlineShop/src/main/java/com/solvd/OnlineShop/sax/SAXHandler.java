@@ -3,13 +3,15 @@ package com.solvd.OnlineShop.sax;
 import org.apache.log4j.Logger;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
-
-import com.solvd.OnlineShop.models.AbstractEntity;
 import com.solvd.OnlineShop.models.Notification;
 import com.solvd.OnlineShop.models.User;
 
+import java.io.IOException;
 import java.util.*;
-import java.io.*;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class SAXHandler extends DefaultHandler {
 	private static final Logger logger = Logger.getLogger(SAXHandler.class);
@@ -31,25 +33,37 @@ public class SAXHandler extends DefaultHandler {
 
 	private List<User> userList;
 	private List<Notification> notificationList;
-	private AbstractEntity lastest;
+	private String lastest;
 	private String elementValue;
+	String xmlFileName;
 
-	public SAXHandler() {
+	public SAXHandler(String xmlFileName) {
 		userList = new ArrayList<User>();
 		notificationList = new ArrayList<Notification>();
 		lastest = null;
+		this.xmlFileName = xmlFileName;
 	}
+	
+	public void parseDocument() {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        try {
+			SAXParser parser = factory.newSAXParser();
+			parser.parse(xmlFileName, this);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			logger.error(e);
+		}
+    }
 
 	@Override
 	public void startElement(String uri, String lName, String qName, Attributes attr) throws SAXException {
 		switch (qName) {
 		case USER:
 			userList.add(new User());
-			lastest = userList.get(userList.size() - 1);
+			lastest = qName;
 			break;
 		case NOTIFICATION:
 			notificationList.add(new Notification());
-			lastest = userList.get(notificationList.size() - 1);
+			lastest = qName;
 			break;
 		}
 	}
@@ -61,14 +75,58 @@ public class SAXHandler extends DefaultHandler {
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		switch (qName) {
-		case ID:
-			lastest.setId(Long.parseLong(elementValue));
+
+		switch (lastest) {
+		case USER:
+			switch (qName) {
+			case ID:
+				userList.get(userList.size() - 1).setId(Long.parseLong(elementValue));
+				break;
+			case NAME:
+				userList.get(userList.size() - 1).setName(elementValue);
+				break;
+			case LAST_NAME:
+				userList.get(userList.size() - 1).setLastName(elementValue);
+				break;
+			case AGE:
+				userList.get(userList.size() - 1).setAge(Integer.parseInt(elementValue));
+				break;
+			case EMAIL:
+				userList.get(userList.size() - 1).setEmail(elementValue);
+				break;
+			case PASSWORD:
+				userList.get(userList.size() - 1).setPassword(elementValue);
+				break;
+			case MOBILE:
+				userList.get(userList.size() - 1).setMobile(elementValue);
+				break;
+			}
 			break;
-		case NAME:
-			((User) lastest).setName(elementValue); // i have to add a cast here but this is wrong
+		case NOTIFICATION:
+			logger.info("elementValue: " + elementValue);
+			switch (qName) {
+			case ID:
+				notificationList.get(notificationList.size() - 1).setId(Long.parseLong(elementValue));
+				break;
+			case TITLE:
+				notificationList.get(notificationList.size() - 1).setTitle(elementValue);
+				break;
+			case DESCRIPTION:
+				notificationList.get(notificationList.size() - 1).setDescription(elementValue);
+				break;
+			case READED:
+				notificationList.get(notificationList.size() - 1).setReaded(Boolean.parseBoolean(elementValue));
+				break;
+			case USER_ID:
+				notificationList.get(notificationList.size() - 1).setUser(getUserById(Long.parseLong(elementValue)));
+				break;
+			}
 			break;
 		}
+	}
+	
+	public User getUserById(long userId) {
+		return userList.stream().filter(u -> userId == u.getId()).findFirst().get();
 	}
 
 	public List<User> getUserList() {

@@ -16,6 +16,11 @@ public class Notification extends AbstractEntity{
 		this.readed = readed;
 		this.user = user;
 	}
+	
+	@Override
+	public String toString() {
+		return getId() + " " + title + " " + description + " " + readed + " " + user.toString();
+	}
 
 	public String getTitle() {
 		return title;
