@@ -24,7 +24,7 @@ public class OrderDAO extends MySQLAbstractDAO implements IOrderDAO {
 
 		Order o = null;
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_ORDER);
 				ResultSet rs = pr.executeQuery();) {
 

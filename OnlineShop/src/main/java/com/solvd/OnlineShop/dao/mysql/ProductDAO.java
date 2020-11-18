@@ -25,7 +25,7 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 	public Optional<List<Product>> getProductsByUserId (long userId){
 		List<Product> productList = new ArrayList<Product>();
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_USER_PRODUCTS_BY_USER_ID);
 				ResultSet rs = pr.executeQuery();) {
 			
@@ -45,7 +45,7 @@ public class ProductDAO extends MySQLAbstractDAO implements IProductDAO {
 	public Optional<Product> getProductsBySearchId(long searchId) {
 		Product product = null;
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_USER_PRODUCTS_BY_SEARCH_ID);
 				ResultSet rs = pr.executeQuery();){
 

@@ -22,7 +22,7 @@ public class PreferenceDAO extends MySQLAbstractDAO implements IPreferenceDAO {
 	public Optional<List<Preference>> getPreferencesByUserId(long userId) {
 		List<Preference> preferenceList = new ArrayList<Preference>();
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_USER_PREFERENCES);
 				ResultSet rs = pr.executeQuery();){
 

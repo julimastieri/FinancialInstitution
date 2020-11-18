@@ -6,6 +6,6 @@ public abstract class MySQLAbstractDAO {
 	protected ConnectionPool pool;
 
 	public MySQLAbstractDAO() {
-		pool = ConnectionPool.getInstance();
+		pool = ConnectionPool.getInstance(5);
 	}
 }

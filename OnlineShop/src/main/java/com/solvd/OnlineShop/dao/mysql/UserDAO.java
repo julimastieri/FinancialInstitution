@@ -26,7 +26,7 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 
 		User u = null;
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_USER);
 				ResultSet rs = pr.executeQuery();) {
 
@@ -44,7 +44,7 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 
 	@Override
 	public User save(User e, long id) {
-		try (Connection con = pool.getAConnection(); PreparedStatement pr = con.prepareStatement(INSERT);) {
+		try (Connection con = pool.getConnection(); PreparedStatement pr = con.prepareStatement(INSERT);) {
 
 			pr.setString(1, e.getName());
 			pr.setString(2, e.getLastName());
@@ -65,7 +65,7 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 
 	@Override
 	public boolean removeById(long id) {
-		try (Connection con = pool.getAConnection(); PreparedStatement pr = con.prepareStatement(DELETE);){
+		try (Connection con = pool.getConnection(); PreparedStatement pr = con.prepareStatement(DELETE);){
 			
 			pr.setLong(1, id);
 			pr.executeUpdate();

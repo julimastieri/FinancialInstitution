@@ -23,7 +23,7 @@ public class CategoryDAO extends MySQLAbstractDAO implements ICategoryDAO {
 	public Optional<Category> getCategoryByPreferenceId(long preferenceId) {
 		Category category = null;
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_CATEGORY_BY_PREFERENCE);
 				ResultSet rs = pr.executeQuery();) {
 

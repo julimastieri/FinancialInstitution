@@ -25,7 +25,7 @@ public class SearchHistoryDAO extends MySQLAbstractDAO implements ISearchHistory
 	public Optional<List<SearchHistory>> getSearchHistoryByUserId(long userId) {
 		List<SearchHistory> searchHistoryList = new ArrayList<SearchHistory>();
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_SEARCH_HISTORY_BY_USER_ID);
 				ResultSet rs = pr.executeQuery();) {
 

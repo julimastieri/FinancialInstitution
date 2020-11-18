@@ -26,7 +26,7 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 	public Optional<Address> getShippingAddress(long id) {
 		Address address = null;
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_SHIPPING_ADDRESS);
 				ResultSet rs = pr.executeQuery();) {
 
@@ -45,7 +45,7 @@ public class AddressDAO extends MySQLAbstractDAO implements IAddressDAO {
 	public Optional<List<Address>> getAddressesByUserId(long id) {
 		List<Address> al = new ArrayList<Address>();
 
-		try (Connection con = pool.getAConnection();
+		try (Connection con = pool.getConnection();
 				PreparedStatement pr = con.prepareStatement(GET_USER_ADDRESSES);
 				ResultSet rs = pr.executeQuery();) {
 

@@ -17,7 +17,6 @@ import java.sql.SQLException;
 
 public class ConnectionPool {
 	private static final Logger logger = Logger.getLogger(ConnectionPool.class);
-	private final static int DEFAULT_POOL_SIZE = 5;
 	private final int MAX_SIZE;
 	private AtomicInteger createdConnections;
 	private BlockingQueue<Connection> connections;
@@ -55,22 +54,15 @@ public class ConnectionPool {
 		return cp;
 	}
 
-	public synchronized static ConnectionPool getInstance() {
-		if (cp == null) {
-			return new ConnectionPool(DEFAULT_POOL_SIZE);
-		}
-		return cp;
-	}
-
-	public Connection getAConnection() throws InterruptedException, SQLException {
+	public Connection getConnection() throws InterruptedException, SQLException {
 		synchronized (this) {
 			if ((connections.size() == 0) && (createdConnections.get() < MAX_SIZE)) {
 				Connection con = DriverManager.getConnection(url, username, password);
 				connections.put(con);
 				createdConnections.incrementAndGet();
 			}
+			return connections.take();
 		}
-		return connections.take();
 	}
 
 	public void releaseConnection(Connection connection) throws InterruptedException {
@@ -81,5 +73,4 @@ public class ConnectionPool {
 		connections.clear();
 		createdConnections = new AtomicInteger();
 	}
-
 }
