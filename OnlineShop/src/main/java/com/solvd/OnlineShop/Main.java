@@ -31,7 +31,6 @@ public class Main {
 	    JAXBContext context = JAXBContext.newInstance(Notification.class);
 	    return (Notification) context.createUnmarshaller()
 	      .unmarshal(new FileReader("./src/main/resources/onlineshopData.xml"));
-	    //"./src/main/resources/onlineshopData.xml"
 	}
 	
 	public static void marshal() throws JAXBException, IOException {
