@@ -1,9 +1,19 @@
 package com.solvd.OnlineShop.models;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import xmlAdapters.DateAdapter;
+
+@XmlRootElement(name="search_history")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SearchHistory extends AbstractEntity{
 	
+	@XmlJavaTypeAdapter(DateAdapter.class)
 	private Date date;
 	private Product product;
 
@@ -30,9 +40,6 @@ public class SearchHistory extends AbstractEntity{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-	
-	
+
 
 }

@@ -2,11 +2,21 @@ package com.solvd.OnlineShop.models;
 
 import java.sql.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Card extends AbstractEntity{
+	@XmlElement(name="card_verification_value")
 	private int cardVerificationValue;
 	private String bank;
 	private int number;
+	@XmlElement(name="cardholder_name")
 	private String cardholderName;
+	@XmlElement(name="expiration_date")
 	private Date expirationDate;
 	private User user;
 	

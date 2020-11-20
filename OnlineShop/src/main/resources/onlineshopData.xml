@@ -1,35 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<onlineshop xmlns="https://www.w3schools.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://www.w3schools.com onlineshopScheme.xsd">
-	
-	<user>
-		<id>1</id>
-		<name>Julian</name> 
-		<last_name>Mastieri</last_name>
-		<age>22</age>
-		<email>jmast@gmail.com</email>
-		<password>1234</password>
-		<mobile>123456789</mobile>
-	</user>
-
-	<user>
-		<id>2</id>
-		<name>Valeria</name> 
-		<last_name>Tottene</last_name>
-		<email>vt@mail.com</email>
-		<password>1234</password>
-		<mobile>123456789</mobile>
-	</user>
-	
-	<notification>
-		<id>1</id>
-		<title>New purchase order completed</title> 
-		<description>You buy a notebook</description>
-		<readed>true</readed>
-		<user_id>1</user_id>
-	</notification>
-	
-</onlineshop>
-
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<notification>
+    <id>1</id>
+    <title>New purchase order completed</title>
+    <description>You buy a notebook</description>
+    <readed>true</readed>
+    <user>
+        <id>1</id>
+        <name>julian</name>
+        <last_name>mastieri</last_name>
+        <age>22</age>
+        <email>jm@mail.com</email>
+        <password>pass</password>
+        <mobile>mob</mobile>
+        <products>
+            <product>
+                <id>1</id>
+                <name>Pc</name>
+                <price>1000.0</price>
+                <description>A computer</description>
+            </product>
+        </products>
+        <search_histories>
+            <search_history>
+                <id>1</id>
+                <date>2020-11-19</date>
+                <product>
+                    <id>1</id>
+                    <name>Pc</name>
+                    <price>1000.0</price>
+                    <description>A computer</description>
+                </product>
+            </search_history>
+        </search_histories>
+        <preferences>
+            <preference>
+                <id>1</id>
+                <category>
+                    <id>1</id>
+                    <name>Technology</name>
+                </category>
+            </preference>
+        </preferences>
+    </user>
+</notification>

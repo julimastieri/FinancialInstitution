@@ -5,7 +5,7 @@
 			elementFormDefault="qualified">
 			
 	<xs:element name="onlineshop"/>
-			
+		
 	<xs:element name="user">
 		<xs:complexType>
 			<xs:sequence>
@@ -16,6 +16,9 @@
 			  <xs:element name="email" type="xs:string"/>
 			  <xs:element name="password" type="xs:string"/>
 			  <xs:element name="mobile" type="xs:string" minOccurs="0"/>
+			  <xs:element ref="products"/>
+			  <xs:element ref="search_histories"/>
+			  <xs:element ref="preferences" />
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -27,7 +30,7 @@
 			  <xs:element name="title" type="xs:string"/>
 			  <xs:element name="description" type="xs:string"/>
 			  <xs:element name="readed" type="xs:boolean"/>
-			  <xs:element name="user_id" type="xs:long"/>
+			  <xs:element ref="user"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -38,7 +41,7 @@
 			  <xs:element name="id" type="xs:long"/>
 			  <xs:element name="amount" type="xs:decimal"/>
 			  <xs:element name="code" type="xs:string"/>
-			  <xs:element name="user_id" type="xs:long"/>
+			  <xs:element ref="user"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -52,18 +55,25 @@
 			  <xs:element name="number" type="xs:integer"/>
 			  <xs:element name="cardholder_name" type="xs:string"/>
 			  <xs:element name="expiration_date" type="xs:date"/>
-			  <xs:element name="user_id" type="xs:long"/>
+			  <xs:element ref="user"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
 	
-	<xs:element name="search_history">
+	<xs:element name="search_histories">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="search_history" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="search_history" nillable="true">
 		<xs:complexType>
 			<xs:sequence>
 			  <xs:element name="id" type="xs:long"/>
 			  <xs:element name="date" type="xs:date"/>
-			  <xs:element name="user_id" type="xs:long"/>
-			  <xs:element name="product_id" type="xs:long"/>
+			  <xs:element ref="product"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -75,7 +85,7 @@
 			  <xs:element name="total" type="xs:decimal"/>
 			  <xs:element name="discount" type="xs:decimal" minOccurs="0"/>
 			  <xs:element name="user_id" type="xs:long" minOccurs="0"/>
-			  <xs:element name="shipping_address" type="xs:long"/>
+			  <xs:element ref="address" />
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -86,7 +96,7 @@
 			  <xs:element name="id" type="xs:long"/>
 			  <xs:element name="payment_method" type="xs:string"/>
 			  <xs:element name="status" type="xs:string"/>
-			  <xs:element name="order_id" type="xs:long" minOccurs="0"/>
+			  <xs:element ref="order" minOccurs="0"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -104,6 +114,14 @@
 		  </xs:complexType>
 	</xs:element>
 	
+	<xs:element name="products" nillable="true">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
 	<xs:element name="product">
 		<xs:complexType>
 			<xs:sequence>
@@ -111,17 +129,23 @@
 			  <xs:element name="name" type="xs:string"/>
 			  <xs:element name="price" type="xs:decimal"/>
 			  <xs:element name="description" type="xs:string" minOccurs="0"/>
-			  <xs:element name="user_id" type="xs:long"/>
 			</xs:sequence>
 		  </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="preferences" nillable="true" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="preference" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
 	
 	<xs:element name="preference">
 		<xs:complexType>
 			<xs:sequence>
 			  <xs:element name="id" type="xs:long"/>
-			  <xs:element name="user_id" type="xs:long"/>
-			  <xs:element name="category_id" type="xs:long"/>
+			  <xs:element ref="category"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
@@ -142,7 +166,7 @@
 			  <xs:element name="title" type="xs:string"/>
 			  <xs:element name="rating" type="xs:string"/>
 			  <xs:element name="content" type="xs:string" minOccurs="0"/>
-			  <xs:element name="product_id" type="xs:long"/>
+			  <xs:element ref="product"/>
 			</xs:sequence>
 		  </xs:complexType>
 	</xs:element>
