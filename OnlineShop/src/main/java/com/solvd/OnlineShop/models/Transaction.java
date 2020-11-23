@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Transaction extends AbstractEntity{
 	@XmlElement(name="payment_method")
+	@JsonProperty("payment_method")
 	private String paymentMethod;
 	private String status;
 	private Order order;

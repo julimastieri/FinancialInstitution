@@ -9,12 +9,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User extends AbstractEntity {
 
 	private String name;
 	@XmlElement(name = "last_name")
+	@JsonProperty("last_name")
 	private String lastName;
 	private int age;
 	private String email;
@@ -36,7 +39,7 @@ public class User extends AbstractEntity {
 	public User() {
 	}
 
-	public User(int id, String name, String lastName, int age, String email, String password, String mobile) {
+	public User(long id, String name, String lastName, int age, String email, String password, String mobile) {
 		super(id);
 		this.name = name;
 		this.lastName = lastName;

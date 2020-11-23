@@ -7,16 +7,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Card extends AbstractEntity{
 	@XmlElement(name="card_verification_value")
+	@JsonProperty("card_verification_value")
 	private int cardVerificationValue;
 	private String bank;
 	private int number;
 	@XmlElement(name="cardholder_name")
+	@JsonProperty("cardholder_name")
 	private String cardholderName;
 	@XmlElement(name="expiration_date")
+	@JsonProperty("expiration_date")
 	private Date expirationDate;
 	private User user;
 	
