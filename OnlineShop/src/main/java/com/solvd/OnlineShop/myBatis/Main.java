@@ -33,14 +33,10 @@ public class Main {
 		sqlSessionFactory.getConfiguration().addMapper(IUserDAO.class);
 
 		try(SqlSession session = ((SqlSessionFactory) sqlSessionFactory).openSession()) {
-			Optional<User> user = session.selectOne("getUserById", 1);
+			User user = session.selectOne("getUserById", 1);
 			
-			//IUserDAO mapper = session.getMapper(IUserDAO.class);
-			//Optional<User> user = mapper.getUserById(1);
-			if (user.isPresent())
-				LOGGER.info(user.get().toString());
-			//else
-				//LOGGER.info("FAIL");
+			LOGGER.info(user.toString());
+			
 		}
 	}
 	

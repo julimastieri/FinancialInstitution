@@ -11,5 +11,9 @@
 	<result column="email" property="email"/>
 	<result column="password" property="password"/>
 	<result column="mobile" property="mobile"/>
+	<!--collection property="products" javaType="ArrayList" ofType="com.solvd.OnlineShop.models.Product"
+	    column="id" resultMap="ProductMapper"/-->
   </resultMap>
+  
+ 
 </mapper>
