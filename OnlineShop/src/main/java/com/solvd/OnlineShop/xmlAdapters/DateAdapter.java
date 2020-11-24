@@ -1,4 +1,4 @@
-package xmlAdapters;
+package com.solvd.OnlineShop.xmlAdapters;
 
 import java.util.Date;
 import java.text.DateFormat;

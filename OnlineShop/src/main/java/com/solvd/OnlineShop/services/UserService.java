@@ -23,7 +23,7 @@ public class UserService {
 
 	public User getUserById(long id) {
 		User user = null;
-		Optional<User> userOptional = userDao.getUserById(id);
+		Optional<User> userOptional = userDao.getUserById((int)id);
 
 		if (userOptional.isPresent()) {
 			user = userOptional.get();
