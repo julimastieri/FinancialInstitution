@@ -31,12 +31,10 @@ public class Main {
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
 		sqlSessionFactory.getConfiguration().addMapper(IUserDAO.class);
-
+		
 		try(SqlSession session = ((SqlSessionFactory) sqlSessionFactory).openSession()) {
 			User user = session.selectOne("getUserById", 1);
-			
 			LOGGER.info(user.toString());
-			
 		}
 	}
 	
