@@ -22,6 +22,7 @@ public class UserDAO extends MySQLAbstractDAO implements IUserDAO {
 				rs.getString("email"), rs.getString("password"), rs.getString("mobile"));
 	}
 
+	
 	public Optional<User> getUserById(long id) {
 
 		User u = null;

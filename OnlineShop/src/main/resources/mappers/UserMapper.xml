@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.OnlineShop.models">
-  <resultMap id="UserMapper" type="com.solvd.OnlineShop.models.User">
+<mapper namespace="com.solvd.OnlineShop.dao.mybatis.IUserDAO">
+  <resultMap id="UserResultMap" type="User">
 	<id column="id" property="id"/>
 	<result column="name" property="name"/>
-	<result column="last_name" property="lastName"/>
+	<result  column="last_name" property="lastName"/>
 	<result column="age" property="age"/>
 	<result column="email" property="email"/>
 	<result column="password" property="password"/>
 	<result column="mobile" property="mobile"/>
-	<!--collection property="products" javaType="ArrayList" ofType="com.solvd.OnlineShop.models.Product"
-	    column="id" resultMap="ProductMapper"/-->
+	<collection property="products" javaType="ArrayList" ofType="Product" column="prod.id" resultMap="./ProductMapper"/>
+	<collection property="searchHistory" javaType="ArrayList" ofType="SearchHistory" column="sh.id" resultMap="./SearchHistoryMapper"/>
+	<collection property="preferences" javaType="ArrayList" ofType="Preference" column="pref.id" resultMap="./PreferenceMapper"/>
   </resultMap>
 </mapper>

@@ -5,26 +5,49 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+ <properties resource="db.properties"/>
+
   <typeAliases>
       <typeAlias alias = "User" type = "com.solvd.OnlineShop.models.User"/>
+	  <typeAlias alias = "Product" type = "com.solvd.OnlineShop.models.Product"/>
+	  <typeAlias alias = "Address" type = "com.solvd.OnlineShop.models.Address"/>
+	  <typeAlias alias = "Card" type = "com.solvd.OnlineShop.models.Card"/>
+	  <typeAlias alias = "Category" type = "com.solvd.OnlineShop.models.Category"/>
+	  <typeAlias alias = "Giftcard" type = "com.solvd.OnlineShop.models.Giftcard"/>
+	  <typeAlias alias = "Notification" type = "com.solvd.OnlineShop.models.Notification"/>
+	  <typeAlias alias = "Order" type = "com.solvd.OnlineShop.models.Order"/>
+	  <typeAlias alias = "Preference" type = "com.solvd.OnlineShop.models.Preference"/>
+	  <typeAlias alias = "SearchHistory" type = "com.solvd.OnlineShop.models.SearchHistory"/>
+	  <typeAlias alias = "Transaction" type = "com.solvd.OnlineShop.models.Transaction"/>
+	  <typeAlias alias = "ProductReview" type = "com.solvd.OnlineShop.models.ProductReview"/>
   </typeAliases>
   
-	<!--property resource=""/-->
 	
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/online_shop"/>
-        <property name="username" value="root"/>
-        <property name="password" value="my-secret-pw"/>
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
       </dataSource>
     </environment>
   </environments>
   
   <mappers>
-    <mapper resource="src/main/resorces/mappers/UserMapper.xml"/>
-	<mapper resource="mappers/ProductMapper.xml"/>
+    <mapper resource="./mappers/UserMapper.xml"/>
+	<mapper resource="./mappers/ProductMapper.xml"/>
+	<mapper resource="./mappers/AddressMapper.xml"/>
+	<mapper resource="./mappers/CardMapper.xml"/>
+	<mapper resource="./mappers/CategoryMapper.xml"/>
+	<mapper resource="./mappers/GiftcardMapper.xml"/>
+	<mapper resource="./mappers/NotificationMapper.xml"/>
+	<mapper resource="./mappers/OrderMapper.xml"/>
+	<mapper resource="./mappers/PreferenceMapper.xml"/>
+	<mapper resource="./mappers/SearchHistoryMapper.xml"/>
+	<mapper resource="./mappers/TransactionMapper.xml"/>
+	<mapper resource="./mappers/ProductReviewMapper.xml"/>
   </mappers>
+  
 </configuration>

@@ -2,7 +2,6 @@ package com.solvd.OnlineShop.myBatis;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Optional;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -19,22 +18,21 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			myBatisUtil();
+			myBatisExample();
 		} catch (IOException e) {
 			LOGGER.error(e);
 		}
 	}
 
-	private static void myBatisUtil() throws IOException {	
+	private static void myBatisExample() throws IOException {	
 		String resource = "mybatis-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-		sqlSessionFactory.getConfiguration().addMapper(IUserDAO.class);
 		
 		try(SqlSession session = ((SqlSessionFactory) sqlSessionFactory).openSession()) {
 			User user = session.selectOne("getUserById", 1);
 			LOGGER.info(user.toString());
+			LOGGER.info(user.getProducts().size());
 		}
 	}
 	
