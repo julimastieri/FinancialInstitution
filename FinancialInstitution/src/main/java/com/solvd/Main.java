@@ -46,7 +46,7 @@ public class Main {
 	}
 
 	public static void connectionPoolExercise() throws InterruptedException, ExecutionException {
-		ConnectionPool cp = ConnectionPool.getInstance();
+		ConnectionPool cp = ConnectionPool.getInstance(5);
 		ExecutorService executor =Executors.newFixedThreadPool(10);
 		
 		// Threads
@@ -75,7 +75,7 @@ public class Main {
 	}
 
 	public static void completableFutureExercise() throws InterruptedException, ExecutionException {
-		ConnectionPool cp = ConnectionPool.getInstance();
+		ConnectionPool cp = ConnectionPool.getInstance(5);
 
 		// Threads
 		ThreadTask thread1 = new ThreadTask(1, cp);

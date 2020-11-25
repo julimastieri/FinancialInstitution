@@ -18,7 +18,7 @@ public class RunnableTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			cp.getAConnection();
+			cp.getConnection();
 			logger.info("Runnable #" + id + " get a connection successfully");
 		} catch (Exception e) {
 			logger.error(e);

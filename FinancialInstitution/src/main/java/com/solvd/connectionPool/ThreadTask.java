@@ -1,5 +1,7 @@
 package main.java.com.solvd.connectionPool;
 
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
 public class ThreadTask extends Thread {
@@ -19,15 +21,15 @@ public class ThreadTask extends Thread {
 	public void start() {
 		this.run();
 	}
-	
+
 	public void run() {
 		try {
-			cp.getAConnection();
+			cp.getConnection();
 			logger.info("Thread #" + id + " get a connection successfully");
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | SQLException e) {
 			logger.error(e);
 		}
-		
+
 	}
 
 }
