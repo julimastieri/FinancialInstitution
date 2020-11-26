@@ -8,5 +8,6 @@
 	<result column="name" property="name"/>
 	<result column="price" property="price"/>
 	<result column="description" property="description"/>
+	dvcsdfvADWADS
   </resultMap>
 </mapper>

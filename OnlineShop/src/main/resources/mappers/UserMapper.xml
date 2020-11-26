@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper 
+<!DOCTYPE mapper 
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.OnlineShop.dao.mybatis.IUserDAO">
@@ -11,8 +12,8 @@
 	<result column="email" property="email"/>
 	<result column="password" property="password"/>
 	<result column="mobile" property="mobile"/>
-	<collection property="products" javaType="ArrayList" ofType="Product" column="prod.id" resultMap="./ProductMapper"/>
-	<collection property="searchHistory" javaType="ArrayList" ofType="SearchHistory" column="sh.id" resultMap="./SearchHistoryMapper"/>
-	<collection property="preferences" javaType="ArrayList" ofType="Preference" column="pref.id" resultMap="./PreferenceMapper"/>
+	<collection property="products" javaType="ArrayList" ofType="Product" column="u.id" foreignColumn="prod.user_id" resultMap="com.solvd.OnlineShop.dao.mybatis.IProductDAO.ProductResultMap"/>
+	<collection property="searchHistory" javaType="ArrayList" ofType="SearchHistory" column="u.id" foreignColumn="sh.user_id"resultMap="com.solvd.OnlineShop.dao.mybatis.ISearchHistoryDAO.SearchHistoryResultMap"/>
+	<collection property="preferences" javaType="ArrayList" ofType="Preference" column="u.id" foreignColumn="pref.user_id" resultMap="com.solvd.OnlineShop.dao.mybatis.IPreferenceDAO.PreferenceResultMap"/>
   </resultMap>
 </mapper>
