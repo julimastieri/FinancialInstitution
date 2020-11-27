@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
 import com.solvd.OnlineShop.dao.IUserDAO;
+import com.solvd.OnlineShop.models.Order;
 import com.solvd.OnlineShop.models.User;
 
 public class Main {
@@ -33,6 +34,11 @@ public class Main {
 			User user = session.selectOne("getUserById", 1);
 			LOGGER.info(user.toString());
 			LOGGER.info(user.getProducts().size());
+			LOGGER.info(user.getProducts().get(0).toString());
+			
+			Order order = session.selectOne("getOrderById", 2);
+			LOGGER.info(order.getTotal());
+			LOGGER.info(order.getShippingAddress().getCity());
 		}
 	}
 	
