@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import com.solvd.OnlineShop.models.Order;
 
 public interface IOrderDAO extends IBaseDAO<Order> {
-	@Select("SELECT * FROM Orders o WHERE o.id=#{id}") //LEFT JOIN Addresses a ON o.shipping_address = a.id
+	@Select("SELECT * FROM Orders o LEFT JOIN Addresses a ON o.shipping_address = a.id WHERE o.id=#{id}") //LEFT JOIN Addresses a ON o.shipping_address = a.id
 	@ResultMap("OrderResultMap")
 	public Order getOrderById(int id);
 }

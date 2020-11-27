@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.solvd.OnlineShop.dao.IOrderDAO">
+<mapper namespace="com.solvd.OnlineShop.dao.mybatis.IOrderDAO">
   <resultMap id="OrderResultMap" type="Order">
 	<id column="id" property="id"/>
 	<result column="total" property="total"/>
 	<result column="discount" property="discount"/>
-	<!--association property="shippingAddress" column="o.shipping_address" foreignColumn="a.id"  resultMap="com.solvd.OnlineShop.dao.IAddressDAO.AddressResultMap"/-->
+	<association property="shippingAddress" column="o.shipping_address" foreignColumn="a.id"  resultMap="com.solvd.OnlineShop.dao.mybatis.IAddressDAO.AddressResultMap"/>
   </resultMap>
 </mapper>

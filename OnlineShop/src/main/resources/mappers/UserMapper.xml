@@ -11,8 +11,8 @@
 	<result column="email" property="email"/>
 	<result column="password" property="password"/>
 	<result column="mobile" property="mobile"/>
-	<collection property="products" javaType="ArrayList" ofType="Product" column="u.id" foreignColumn="prod.user_id" resultMap="com.solvd.OnlineShop.dao.mybatis.IProductDAO.ProductResultMap"/>
-	<collection property="searchHistory" javaType="ArrayList" ofType="SearchHistory" column="u.id" foreignColumn="sh.user_id" resultMap="com.solvd.OnlineShop.dao.mybatis.ISearchHistoryDAO.SearchHistoryResultMap"/>
-	<collection property="preferences" javaType="ArrayList" ofType="Preference" column="u.id" foreignColumn="pref.user_id" resultMap="com.solvd.OnlineShop.dao.mybatis.IPreferenceDAO.PreferenceResultMap"/>
+	<collection property="products" javaType="ArrayList" ofType="Product" columnPrefix="prod_" resultMap="com.solvd.OnlineShop.dao.mybatis.IProductDAO.ProductResultMap"/>
+	<collection property="searchHistory" javaType="ArrayList" ofType="SearchHistory" columnPrefix="sh_" resultMap="com.solvd.OnlineShop.dao.mybatis.ISearchHistoryDAO.SearchHistoryResultMap"/>
+	<collection property="preferences" javaType="ArrayList" ofType="Preference" columnPrefix="pref_" resultMap="com.solvd.OnlineShop.dao.mybatis.IPreferenceDAO.PreferenceResultMap"/>
   </resultMap>
 </mapper>

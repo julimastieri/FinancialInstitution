@@ -6,11 +6,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Product extends AbstractEntity{
+public class Product extends AbstractEntity {
 	private String name;
 	private float price;
 	private String description;
-	
+
 	public Product() {
 	}
 
@@ -19,6 +19,11 @@ public class Product extends AbstractEntity{
 		this.name = name;
 		this.price = price;
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return getId()+ " " + name + " " + price + " " + description;
 	}
 
 	public String getName() {
